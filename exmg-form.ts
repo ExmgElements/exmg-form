@@ -29,6 +29,10 @@ export class ExmgForm extends LitElement {
         :host {
             font-family: 'Roboto', 'Noto', sans-serif;
         }
+        .actions {
+          margin: 24px 0;
+          text-align: right;
+        }
         paper-button.primary {
           background: var(--primary-color);
           color: white;
