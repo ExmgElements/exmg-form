@@ -26,6 +26,9 @@ export class ExmgForm extends LitElement {
     return html`
       <!--suppress CssUnresolvedCustomProperty -->
       <style>
+        :host {
+            font-family: 'Roboto', 'Noto', sans-serif;
+        }
         paper-button.primary {
           background: var(--primary-color);
           color: white;
@@ -49,7 +52,54 @@ export class ExmgForm extends LitElement {
           color: white;
           background: var(--error-color);
         }
+        .error {
+          display: none;
+          font-size: 14px;
+          line-height: 20px;
+          color: rgba(0,0,0,0.54);
+          -webkit-box-flex: 0 0 auto;
+          -webkit-flex: 0 0 auto;
+          flex: 0 0 auto;
+          padding: 0;
+        }
+        .error > span {
+          background-color: #fbe9e7;
+          color: #ff5252;
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          padding: 0 0 0 24px;
+          margin: 0 0 12px;
+          min-height: 48px;
+        }
+        .error > span > span {
+          padding-left: 36px;
+          margin-right: 24px;
+          position: relative;
+          padding: 12px 0;
+          line-height: 20px;
+          font-size: 14px;
+          white-space: normal;
+          font-weight: 500;
+          display: inline-block;
+          vertical-align: middle;
+        }
+        .error iron-icon {
+          margin-right: 12px;
+          color: #ff5252;
+        }
+        .error.show {
+          display: block;
+        }
       </style>
+      <div class="error show">
+        <span class="body">
+          <span>
+            <iron-icon icon="exmg-icons:warning"></iron-icon>
+            <span class="msg">Error message</span>
+          </span>
+        </span>
+      </div>
       <iron-form id="iron-form" @iron-form-submit="${this.onIronFormSubmit}">
         <form>
           <slot></slot>
