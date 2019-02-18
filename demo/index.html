@@ -19,6 +19,7 @@
         import '@polymer/iron-demo-helpers/demo-pages-shared-styles';
         import '@polymer/iron-demo-helpers/demo-snippet';
         import '@polymer/paper-input/paper-input.js';
+        import '@polymer/paper-input/paper-textarea';
         import '@polymer/paper-button/paper-button.js';
         import '@polymer/paper-item/paper-item.js';
         import '@polymer/paper-item/paper-item-body.js';
@@ -49,8 +50,11 @@
             //language=html
             return html`
               <exmg-form @submit="${this.submit}" @cancel="${this.cancel}">
-                  <paper-input name="name" label="Name" required></paper-input>
-                  <paper-input name="test" label="Test"></paper-input>
+                <paper-input label="text input" required></paper-input>
+                <paper-input label="text input" value="pre-filled"></paper-input>
+                <paper-textarea label="autoresizing textarea input"></paper-textarea>
+                <paper-input label="password input" type="password"></paper-input>
+                <paper-input label="disabled input" disabled value="batman"></paper-input>
               </exmg-form>
             `;
           }
