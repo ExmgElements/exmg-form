@@ -41,6 +41,7 @@
           }
 
           submit(event) {
+            console.log('submit', event);
             setTimeout(_ => {
               event.path[0].error('User does not have permission to save data');
             }, 1500);
