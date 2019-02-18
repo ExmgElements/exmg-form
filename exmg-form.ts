@@ -1,6 +1,7 @@
 import {customElement, html, LitElement, property, query} from 'lit-element';
 import '@polymer/paper-button';
 import '@polymer/iron-form';
+import '@polymer/paper-spinner/paper-spinner-lite';
 import '@polymer/paper-icon-button';
 import {exmgFormStyles} from './exmg-form-styles';
 
@@ -67,7 +68,9 @@ export class ExmgForm extends LitElement {
               @click="${this.onSubmitBtnClick}"
               ?disabled="${this.submitting}"
               class="primary"
-            >${this.submitButtonCopy}</paper-button>
+            >
+                ${this.submitButtonCopy}${this.submitting ? html`<paper-spinner-lite active></paper-spinner-lite>`: ''}
+            </paper-button>
           </div>
         </form>
       </iron-form>

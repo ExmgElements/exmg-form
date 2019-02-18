@@ -51,5 +51,12 @@ export const exmgFormStyles = html`
     .error.show {
       display: block;
     }
+    
+    paper-spinner-lite {
+      vertical-align: middle;
+      width: 20px;
+      height: 20px;
+      margin-left: 10px;
+    }
   </style>
 `;
