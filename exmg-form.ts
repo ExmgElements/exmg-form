@@ -72,7 +72,7 @@ export class ExmgForm extends LitElement {
       })
     } else {
       Array.from(this.children).forEach((elem: Element) => {
-        (<HTMLElement>elem).style.display = 'block';
+        (<HTMLElement>elem).style.display = null;
       })
     }
   }
