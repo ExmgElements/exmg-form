@@ -34,19 +34,21 @@
           }
 
           submit(event) {
-            const {detail, target} = event;
-            // Save data
-            console.log('Data: ', event.detail);
+            console.log('submit', event);
 
             setTimeout(_ => {
               target.error('User does not have permission to save data');
             }, 1500);
           }
 
+          cancel(event) {
+            console.log('cancel', event);
+          }
+
           render () {
             //language=html
             return html`
-              <exmg-form @submit="${this.submit}">
+              <exmg-form @submit="${this.submit}" @cancel="${this.cancel}">
                   <paper-input name="name" label="Name" required></paper-input>
                   <paper-input name="test" label="Test"></paper-input>
               </exmg-form>

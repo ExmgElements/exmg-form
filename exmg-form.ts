@@ -41,11 +41,25 @@ export class ExmgForm extends LitElement {
           {
             bubbles: false,
             composed: true,
-            detail: this.ironFormElem!.serializeForm()
+            detail: this.ironFormElem!.serializeForm(),
           }
         )
       );
     }
+  }
+
+  private onCancelBtnClick(): void {
+    this.submitting = false;
+    this.errorMessage = '';
+    this.dispatchEvent(
+      new CustomEvent(
+        'cancel',
+        {
+          bubbles: false,
+          composed: true,
+        }
+      )
+    );
   }
 
   protected render() {
@@ -63,7 +77,11 @@ export class ExmgForm extends LitElement {
         <form id="form">
           <slot></slot>
           <div class="actions">
-            ${this.showCancelButton ? html`<paper-button>Cancel</paper-button>` : ''}
+            ${
+              this.showCancelButton ?
+                html`<paper-button @click="${this.onCancelBtnClick}">Cancel</paper-button>`:
+                ''
+            }
             <paper-button
               @click="${this.onSubmitBtnClick}"
               ?disabled="${this.submitting}"
