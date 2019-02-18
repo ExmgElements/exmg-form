@@ -13,63 +13,13 @@ export class ExmgForm extends LitElement {
   public submitButtonCopy: string = 'Submit';
 
   @property({type: String, attribute: 'error-message'})
-  private errorMessage?: string;
+  private errorMessage: string = '';
 
   @property({type: Boolean, reflect: true})
   private submitting: boolean = false;
 
   @query('#ironForm')
   private ironFormElem?: HTMLElement|any;
-
-  constructor() {
-    super();
-  }
-
-  private onIronFormError(event: CustomEvent): void {
-    this.submitting = false;
-    console.log('onIronFormError', event);
-  }
-
-  private onIronFormInvalid(event: CustomEvent): void {
-    this.submitting = false;
-    console.log('onIronFormInvalid', event);
-  }
-
-  private onIronFormPresubmit(event: CustomEvent): void {
-    console.log('onIronFormPresubmit', event);
-  }
-
-  private onIronFormReset(event: CustomEvent): void {
-    this.submitting = false;
-    console.log('onIronFormReset', event);
-  }
-
-  private onIronFormResponse(event: CustomEvent): void {
-    this.submitting = false;
-    console.log('onIronFormResponse', event);
-  }
-
-  private onIronFormSubmit(event: CustomEvent): void {
-    console.log('onIronFormSubmit');
-    this.dispatchEvent(
-      new CustomEvent(
-        'submit',
-        {
-          bubbles: false,
-          composed: true,
-          detail: event.detail
-        }
-        )
-    );
-    this.submitting = false;
-  }
-
-  private onSubmitBtnClick(): void {
-    console.log('onSubmitBtnClick');
-    this.submitting = true;
-    this.errorMessage = undefined;
-    this.ironFormElem!.submit();
-  }
 
   public done(): void {
     this.submitting = false;
@@ -78,6 +28,23 @@ export class ExmgForm extends LitElement {
   public error(errorMessage: string): void {
     this.submitting = false;
     this.errorMessage = errorMessage;
+  }
+
+  private onSubmitBtnClick(): void {
+    if (this.ironFormElem!.validate()) {
+      this.submitting = true;
+      this.errorMessage = '';
+      this.dispatchEvent(
+        new CustomEvent(
+          'submit',
+          {
+            bubbles: false,
+            composed: true,
+            detail: this.ironFormElem!.serializeForm()
+          }
+        )
+      );
+    }
   }
 
   protected render() {
@@ -91,15 +58,8 @@ export class ExmgForm extends LitElement {
           </span>
         </span>
       </div>
-      <iron-form id="ironForm"
-        @iron-form-error="${this.onIronFormError}"
-        @iron-form-invalid="${this.onIronFormInvalid}"
-        @iron-form-presubmit="${this.onIronFormPresubmit}"
-        @iron-form-reset="${this.onIronFormReset}"
-        @iron-form-response="${this.onIronFormResponse}"
-        @iron-form-submit="${this.onIronFormSubmit}"
-      >
-        <form>
+      <iron-form id="ironForm">
+        <form id="form">
           <slot></slot>
           <div class="actions">
             ${this.showCancelButton ? html`<paper-button>Cancel</paper-button>` : ''}
