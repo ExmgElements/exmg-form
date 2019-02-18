@@ -34,7 +34,13 @@
           }
 
           submit(event) {
-            console.log('submit', event);
+            const {detail, target} = event;
+            // Save data
+            console.log('Data: ', event.detail);
+
+            setTimeout(_ => {
+              target.error('User does not have permission to save data');
+            }, 1000);
           }
 
           render () {
