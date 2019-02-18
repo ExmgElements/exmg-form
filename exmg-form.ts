@@ -1,4 +1,4 @@
-import {customElement, html, LitElement, property, query} from 'lit-element';
+import {customElement, html, LitElement, property, PropertyValues, query} from 'lit-element';
 import '@polymer/paper-button';
 import '@polymer/iron-form';
 import '@polymer/paper-spinner/paper-spinner-lite';
@@ -12,6 +12,9 @@ export class ExmgForm extends LitElement {
 
   @property({type: String, attribute: 'submit-button-copy'})
   public submitButtonCopy: string = 'Submit';
+
+  @property({type: Boolean})
+  public inline: boolean = false;
 
   @property({type: String, attribute: 'error-message'})
   private errorMessage: string = '';
@@ -62,6 +65,18 @@ export class ExmgForm extends LitElement {
     );
   }
 
+  protected updated(_changedProperties: PropertyValues): void {
+    if (this.inline) {
+      Array.from(this.children).forEach((elem: Element) => {
+        (<HTMLElement>elem).style.display = 'inline-block';
+      })
+    } else {
+      Array.from(this.children).forEach((elem: Element) => {
+        (<HTMLElement>elem).style.display = 'block';
+      })
+    }
+  }
+
   protected render() {
     return html`
       ${exmgFormStyles}
@@ -76,7 +91,7 @@ export class ExmgForm extends LitElement {
       <iron-form id="ironForm">
         <form id="form">
           <slot></slot>
-          <div class="actions">
+          <div class="actions ${this.inline ? 'inline' : ''}">
             ${
               this.showCancelButton ?
                 html`<paper-button @click="${this.onCancelBtnClick}">Cancel</paper-button>`:

@@ -12,6 +12,9 @@ export const exmgFormStyles = html`
       margin: 24px 0;
       text-align: right;
     }
+    .inline {
+      display: inline-block;
+    }
     .error {
       display: none;
       font-size: 14px;
@@ -33,10 +36,9 @@ export const exmgFormStyles = html`
       min-height: 48px;
     }
     .error > span > span {
-      padding-left: 36px;
       margin-right: 24px;
       position: relative;
-      padding: 12px 0;
+      padding: 12px 0 12px 36px;
       line-height: 20px;
       font-size: 14px;
       white-space: normal;
