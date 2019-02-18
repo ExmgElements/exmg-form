@@ -2,7 +2,7 @@ import {customElement, html, LitElement, property, PropertyValues, query} from '
 import '@polymer/paper-button';
 import '@polymer/iron-form';
 import '@polymer/paper-spinner/paper-spinner-lite';
-import '@polymer/paper-icon-button';
+import '@polymer/iron-icon';
 import {exmgFormStyles} from './exmg-form-styles';
 
 @customElement('exmg-form')
