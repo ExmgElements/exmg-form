@@ -34,6 +34,9 @@
     "lit-element": "^2.0.1"
   },
   "devDependencies": {
+    "@exmg/exmg-markdown-editor": "^3.0.0",
+    "@exmg/exmg-paper-combobox": "^3.0.2",
+    "@exmg/exmg-paper-token-input": "^3.0.0",
     "@polymer/iron-component-page": "^4.0.1",
     "@polymer/iron-demo-helpers": "^3.0.2",
     "@polymer/paper-input": "^3.0.1",
