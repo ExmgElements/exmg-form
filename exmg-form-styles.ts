@@ -53,7 +53,7 @@ export const exmgFormStyles = html`
     .error.show {
       display: block;
     }
-    
+
     paper-spinner-lite {
       vertical-align: middle;
       width: 20px;

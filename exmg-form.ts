@@ -65,15 +65,15 @@ export class ExmgForm extends LitElement {
     );
   }
 
-  protected updated(_changedProperties: PropertyValues): void {
+  protected updated(_: PropertyValues): void {
     if (this.inline) {
       Array.from(this.children).forEach((elem: Element) => {
         (<HTMLElement>elem).style.display = 'inline-block';
-      })
+      });
     } else {
       Array.from(this.children).forEach((elem: Element) => {
         (<HTMLElement>elem).style.display = null;
-      })
+      });
     }
   }
 
@@ -94,7 +94,7 @@ export class ExmgForm extends LitElement {
           <div class="actions ${this.inline ? 'inline' : ''}">
             ${
               this.showCancelButton ?
-                html`<paper-button @click="${this.onCancelBtnClick}">Cancel</paper-button>`:
+                html`<paper-button @click="${this.onCancelBtnClick}">Cancel</paper-button>` :
                 ''
             }
             <paper-button
@@ -102,7 +102,7 @@ export class ExmgForm extends LitElement {
               ?disabled="${this.submitting}"
               class="primary"
             >
-                ${this.submitButtonCopy}${this.submitting ? html`<paper-spinner-lite active></paper-spinner-lite>`: ''}
+                ${this.submitButtonCopy}${this.submitting ? html`<paper-spinner-lite active></paper-spinner-lite>` : ''}
             </paper-button>
           </div>
         </form>
