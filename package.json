@@ -13,14 +13,14 @@
     "token",
     "input"
   ],
-  "main": "exmg-paper-token-input.js",
+  "main": "exmg-form.js",
   "files": [
     "exmg-*.js",
     "exmg-*.d.ts"
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/ExmgElements/exmg-paper-token-input.git"
+    "url": "git://github.com/ExmgElements/exmg-form.git"
   },
   "license": "MIT",
   "dependencies": {
