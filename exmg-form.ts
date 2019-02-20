@@ -94,7 +94,7 @@ export class ExmgForm extends LitElement {
           <div class="actions ${this.inline ? 'inline' : ''}">
             ${
               this.showCancelButton ?
-                html`<paper-button @click="${this.onCancelBtnClick}">Cancel</paper-button>` :
+                html`<paper-button class="cancel" @click="${this.onCancelBtnClick}">Cancel</paper-button>` :
                 ''
             }
             <paper-button
