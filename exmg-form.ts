@@ -1,8 +1,9 @@
-import {customElement, html, LitElement, property, PropertyValues, query} from 'lit-element';
+import {css, unsafeCSS, customElement, html, LitElement, property, PropertyValues, query} from 'lit-element';
 import '@polymer/paper-button';
 import '@polymer/iron-form';
 import '@polymer/paper-spinner/paper-spinner-lite';
 import '@polymer/iron-icon';
+import {sharedButtonStyles} from '@exmg/exmg-cms-styles/exmg-cms-button-styles.js';
 import {exmgFormStyles} from './exmg-form-styles';
 
 @customElement('exmg-form')
@@ -77,9 +78,15 @@ export class ExmgForm extends LitElement {
     }
   }
 
+  static styles = [
+    css`
+      ${unsafeCSS(sharedButtonStyles.innerHTML.replace('<style>', '').replace('</style>', ''))}
+    `,
+    exmgFormStyles,
+  ];
+
   protected render() {
     return html`
-      ${exmgFormStyles}
       <div class="error ${ !!this.errorMessage ? 'show' : '' }">
         <span class="body">
           <span>

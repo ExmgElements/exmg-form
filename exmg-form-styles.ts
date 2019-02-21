@@ -1,10 +1,6 @@
-import {html} from 'lit-element';
-import {sharedButtonStyles} from '@exmg/exmg-cms-styles/exmg-cms-button-styles.js';
+import {css} from 'lit-element';
 
-export const exmgFormStyles = html`
-  <style>
-    ${sharedButtonStyles.innerHTML.replace('<style>', '').replace('</style>', '')}
-
+export const exmgFormStyles = css`
     :host {
       font-family: 'Roboto', 'Noto', sans-serif;
     }
@@ -60,5 +56,4 @@ export const exmgFormStyles = html`
       height: 20px;
       margin-left: 10px;
     }
-  </style>
 `;
