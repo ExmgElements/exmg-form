@@ -29,7 +29,7 @@
     "@polymer/iron-form": "^3.0.1",
     "@polymer/iron-icon": "^3.0.1",
     "@polymer/paper-button": "^3.0.1",
-    "@polymer/paper-spinner": "^3.0.1",
+    "@polymer/paper-spinner": "^3.0.2",
     "@polymer/polymer": "^3.1.0",
     "lit-element": "^2.0.1"
   },
@@ -50,11 +50,11 @@
     "gulp": "^4.0.0",
     "gulp-rename": "^1.4.0",
     "gulp-replace": "^1.0.0",
-    "mocha": "^5.2.0",
-    "tslint": "^5.12.1",
+    "mocha": "^6.0.2",
+    "tslint": "^5.13.1",
     "tslint-config-exmg": "^1.0.2",
     "typedoc": "^0.14.2",
-    "typescript": "^3.3.3",
+    "typescript": "^3.3.3333",
     "wct-mocha": "^1.0.0",
     "web-animations-js": "^2.3.1"
   },
