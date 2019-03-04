@@ -1,6 +1,5 @@
 import {ExmgForm} from '../exmg-form';
 import {promisifyFlush, onExmgFormCancel, onExmgFormSubmit} from './utils';
-import {PaperInputElement} from '@polymer/paper-input/paper-input';
 
 declare const fixture: <T extends HTMLElement = HTMLElement>(id: string, model?: object) => T;
 declare const flush: (cb?: Function) => void;
@@ -23,7 +22,7 @@ suite('<exmg-form>', function () {
     test('submitting form', async () => {
       await flushCompleted();
 
-      const field1Input = element.querySelector<PaperInputElement>('paper-input[name=field1]')!;
+      const field1Input = element.querySelector<HTMLInputElement>('paper-input[name=field1]')!;
       const submitBtn = <HTMLElement>element.shadowRoot!.querySelector('paper-button.primary');
 
       const eventPromise = onExmgFormSubmit(element, true);
