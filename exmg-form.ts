@@ -5,6 +5,7 @@ import '@polymer/paper-spinner/paper-spinner-lite';
 import '@polymer/iron-icon';
 import {sharedButtonStyles} from '@exmg/exmg-cms-styles/exmg-cms-button-styles.js';
 import {exmgFormStyles} from './exmg-form-styles';
+import {IronFormElement} from '@polymer/iron-form/iron-form';
 
 @customElement('exmg-form')
 export class ExmgForm extends LitElement {
@@ -24,7 +25,7 @@ export class ExmgForm extends LitElement {
   private submitting: boolean = false;
 
   @query('#ironForm')
-  private ironFormElem?: HTMLElement|any;
+  private ironFormElem?: IronFormElement;
 
   public done(): void {
     this.submitting = false;
@@ -35,7 +36,7 @@ export class ExmgForm extends LitElement {
     this.errorMessage = errorMessage;
   }
 
-  private onSubmitBtnClick(): void {
+  public submit(): void {
     if (this.ironFormElem!.validate()) {
       this.submitting = true;
       this.errorMessage = '';
@@ -50,6 +51,22 @@ export class ExmgForm extends LitElement {
         )
       );
     }
+  }
+
+  public validate(): void {
+    this.ironFormElem!.validate();
+  }
+
+  public reset(): void {
+    this.ironFormElem!.reset();
+  }
+
+  public serializeForm(): {[key: string]: any} {
+    return this.ironFormElem!.serializeForm();
+  }
+
+  private onSubmitBtnClick(): void {
+    this.submit();
   }
 
   private onCancelBtnClick(): void {
