@@ -2,12 +2,13 @@ import {css, unsafeCSS, customElement, html, LitElement, property, PropertyValue
 import '@polymer/paper-button';
 import '@polymer/iron-form';
 import '@polymer/paper-spinner/paper-spinner-lite';
-import '@polymer/iron-icon';
 import {sharedButtonStyles} from '@exmg/exmg-cms-styles/exmg-cms-button-styles.js';
 import {exmgFormStyles} from './exmg-form-styles';
 import {IronFormElement} from '@polymer/iron-form/iron-form';
 
 const ENTER_KEY_CODE = 13;
+
+const warningIcon = html`<svg height="24" viewBox="0 0 24 24" width="24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"></path></svg>`;
 
 @customElement('exmg-form')
 export class ExmgForm extends LitElement {
@@ -130,8 +131,8 @@ export class ExmgForm extends LitElement {
     return html`
       <div class="error ${ !!this.errorMessage ? 'show' : '' }">
         <span class="body">
-          <span>
-            <iron-icon icon="exmg-icons:warning"></iron-icon>
+          <span class="body-content">
+            ${warningIcon}
             <span class="msg">${this.errorMessage}</span>
           </span>
         </span>
