@@ -90,6 +90,7 @@ export class ExmgForm extends LitElement {
     switch (e.code || e.keyCode) {
       case ENTER_KEY_CODE:
       case 'Enter':
+      case 'NumpadEnter':
         e.stopPropagation();
         this.submit();
         break;
