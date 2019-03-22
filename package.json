@@ -36,7 +36,7 @@
   "devDependencies": {
     "@exmg/exmg-markdown-editor": "^4.3.0",
     "@exmg/exmg-paper-combobox": "^4.2.1",
-    "@exmg/exmg-paper-token-input": "^4.4.0",
+    "@exmg/exmg-paper-token-input": "^4.5.1",
     "@exmg/exmg-radio-group": "^1.1.0",
     "@polymer/iron-component-page": "^4.0.1",
     "@polymer/iron-demo-helpers": "^3.1.0",
