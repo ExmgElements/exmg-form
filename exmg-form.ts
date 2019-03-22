@@ -7,6 +7,8 @@ import {sharedButtonStyles} from '@exmg/exmg-cms-styles/exmg-cms-button-styles.j
 import {exmgFormStyles} from './exmg-form-styles';
 import {IronFormElement} from '@polymer/iron-form/iron-form';
 
+const ENTER_KEY_CODE = 13;
+
 @customElement('exmg-form')
 export class ExmgForm extends LitElement {
   @property({type: String, attribute: 'show-cancel-button'})
@@ -81,6 +83,28 @@ export class ExmgForm extends LitElement {
         }
       )
     );
+  }
+
+  private onEnterPressed(e: KeyboardEvent) {
+    switch (e.code || e.keyCode) {
+      case ENTER_KEY_CODE:
+      case 'Enter':
+        e.stopPropagation();
+        this.submit();
+        break;
+    }
+  }
+
+  connectedCallback(): void {
+    super.connectedCallback();
+
+    this.addEventListener('keydown', this.onEnterPressed);
+  }
+
+  disconnectedCallback(): void {
+    this.removeEventListener('keydown', this.onEnterPressed);
+
+    super.disconnectedCallback();
   }
 
   protected updated(_: PropertyValues): void {
