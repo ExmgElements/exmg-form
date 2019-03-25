@@ -61,6 +61,57 @@
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
 				<h1 id="exmg-form">exmg-form</h1>
+				<p>This component provides basic form functionality. It is made on top of <code>&lt;iron-form&gt;</code>.</p>
+				<p>You can put any children elements inside of it, but only elements implementing IronFormElementBehavior will be serialized.
+				Also, any element implementing IronFormElementBehavior have to implement validate() method. In other case form will not be working.</p>
+				<p>Read more: IronFormElementBehavior (<a href="https://github.com/PolymerElements/iron-form-element-behavior)">https://github.com/PolymerElements/iron-form-element-behavior)</a>.</p>
+				<p>Events:</p>
+				<ol>
+					<li><strong>submit</strong> - when submit button pressed. Will contain all form serialized data. Submit event will not fire when any of required fields are not set. </li>
+					<li><strong>cancel</strong> - when cancel button pressed.</li>
+				</ol>
+				<p>Attributes:</p>
+				<ol>
+					<li><strong>showCancelButton</strong></li>
+					<li><strong>submitButtonCopy</strong></li>
+					<li><strong>inline</strong> - whether or not try to display form in single line</li>
+				</ol>
+				<pre><code>&lt;exmg-form
+    @submit="${this.submit}"
+    @cancel="${this.cancel}"
+    ?showCancelButton=${<span class="hljs-keyword">true</span>}
+    submit-button-copy="Submit"
+    ?<span class="hljs-keyword">inline</span>=${<span class="hljs-keyword">false</span>}
+&gt;
+    &lt;paper-<span class="hljs-keyword">input</span> label="text input" required&gt;&lt;/paper-<span class="hljs-keyword">input</span>&gt;
+    &lt;paper-<span class="hljs-keyword">input</span> label="text input" <span class="hljs-keyword">value</span>="pre-filled"&gt;&lt;/paper-<span class="hljs-keyword">input</span>&gt;
+    &lt;paper-<span class="hljs-keyword">input</span> label="password input" <span class="hljs-keyword">type</span>="password"&gt;&lt;/paper-<span class="hljs-keyword">input</span>&gt;
+    &lt;paper-<span class="hljs-keyword">input</span> label="disabled input" disabled <span class="hljs-keyword">value</span>="batman"&gt;&lt;/paper-<span class="hljs-keyword">input</span>&gt;
+    &lt;paper-<span class="hljs-keyword">input</span> <span class="hljs-type">name</span>="name" label="Summary" required <span class="hljs-keyword">always</span>-<span class="hljs-type">float</span>-label&gt;&lt;/paper-<span class="hljs-keyword">input</span>&gt;
+    &lt;paper-<span class="hljs-keyword">input</span> <span class="hljs-type">name</span>="estimate" label="Estimates" <span class="hljs-keyword">type</span>="number" <span class="hljs-keyword">always</span>-<span class="hljs-type">float</span>-label style="max-width:180px;"&gt;&lt;/paper-<span class="hljs-keyword">input</span>&gt;
+
+    &lt;paper-textarea label="autoresizing textarea input"&gt;&lt;/paper-textarea&gt;
+
+    &lt;exmg-paper-combobox label="Project" <span class="hljs-type">name</span>="combobox" style="max-width:280px;" <span class="hljs-keyword">always</span>-<span class="hljs-type">float</span>-label required&gt;
+      &lt;paper-item&gt;PlayToTV&lt;/paper-item&gt;
+      &lt;paper-item&gt;Website&lt;/paper-item&gt;
+    &lt;/exmg-paper-combobox&gt;
+    &lt;p <span class="hljs-keyword">class</span>="help"&gt;<span class="hljs-keyword">Some</span> issue <span class="hljs-keyword">types</span> are unavailable due <span class="hljs-keyword">to</span> incompatible field <span class="hljs-keyword">configuration</span> <span class="hljs-keyword">and</span>/<span class="hljs-keyword">or</span> workflow associations.&lt;/p&gt;
+    &lt;hr /&gt;
+    &lt;p <span class="hljs-keyword">class</span>="help"&gt;<span class="hljs-keyword">Start</span> typing <span class="hljs-keyword">to</span> <span class="hljs-keyword">get</span> a list <span class="hljs-keyword">of</span> possible matches.&lt;/p&gt;
+    &lt;exmg-paper-token-<span class="hljs-keyword">input</span> <span class="hljs-type">name</span>="tokens" label="Components" <span class="hljs-keyword">always</span>-<span class="hljs-type">float</span>-label&gt;
+      &lt;paper-item&gt;javascript&lt;/paper-item&gt;
+      &lt;paper-item&gt;css&lt;/paper-item&gt;
+    &lt;/exmg-paper-token-<span class="hljs-keyword">input</span>&gt;
+    &lt;p <span class="hljs-keyword">class</span>="help"&gt;<span class="hljs-keyword">Start</span> typing <span class="hljs-keyword">to</span> <span class="hljs-keyword">get</span> a list <span class="hljs-keyword">of</span> possible matches <span class="hljs-keyword">or</span> press down <span class="hljs-keyword">to</span> <span class="hljs-keyword">select</span>.&lt;/p&gt;
+    &lt;p <span class="hljs-keyword">class</span>="help"&gt;Estimated <span class="hljs-type">time</span> needed <span class="hljs-keyword">to</span> resolve this issue <span class="hljs-keyword">in</span> hours.&lt;/p&gt;
+    &lt;label&gt;Message&lt;/label&gt;
+    &lt;exmg-markdown-editor <span class="hljs-type">name</span>="markdown" required&gt;
+      &lt;marked-element markdown="# Hello Word!"&gt;
+        &lt;div slot="markdown-html"&gt;&lt;/div&gt;
+      &lt;/marked-element&gt;
+    &lt;/exmg-markdown-editor&gt;
+&lt;/exmg-form&gt;</code></pre>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
