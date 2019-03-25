@@ -21,7 +21,7 @@ export const exmgFormStyles = css`
       flex: 0 0 auto;
       padding: 0;
     }
-    .error > span {
+    .error > .body {
       background-color: #fbe9e7;
       color: #ff5252;
       display: flex;
@@ -31,20 +31,21 @@ export const exmgFormStyles = css`
       margin: 0 0 12px;
       min-height: 48px;
     }
-    .error > span > span {
+    .error > .body > .body-content {
       margin-right: 24px;
       position: relative;
-      padding: 12px 0 12px 36px;
       line-height: 20px;
       font-size: 14px;
       white-space: normal;
       font-weight: 500;
-      display: inline-block;
       vertical-align: middle;
+      fill: #ff5252;
+      display: flex;
+      flex: 1;
+      align-items: center;
     }
-    .error iron-icon {
-      margin-right: 12px;
-      color: #ff5252;
+    .error > .body > .body-content > svg {
+        margin-right: 12px;
     }
     .error.show {
       display: block;

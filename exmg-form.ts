@@ -2,9 +2,13 @@ import {css, unsafeCSS, customElement, html, LitElement, property, PropertyValue
 import '@polymer/paper-button';
 import '@polymer/iron-form';
 import '@polymer/paper-spinner/paper-spinner-lite';
-import '@polymer/iron-icon';
 import {sharedButtonStyles} from '@exmg/exmg-cms-styles/exmg-cms-button-styles.js';
 import {exmgFormStyles} from './exmg-form-styles';
+import {IronFormElement} from '@polymer/iron-form/iron-form';
+
+const ENTER_KEY_CODE = 13;
+
+const warningIcon = html`<svg height="24" viewBox="0 0 24 24" width="24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"></path></svg>`;
 
 @customElement('exmg-form')
 export class ExmgForm extends LitElement {
@@ -24,7 +28,7 @@ export class ExmgForm extends LitElement {
   private submitting: boolean = false;
 
   @query('#ironForm')
-  private ironFormElem?: HTMLElement|any;
+  private ironFormElem?: IronFormElement;
 
   public done(): void {
     this.submitting = false;
@@ -35,7 +39,7 @@ export class ExmgForm extends LitElement {
     this.errorMessage = errorMessage;
   }
 
-  private onSubmitBtnClick(): void {
+  public submit(): void {
     if (this.ironFormElem!.validate()) {
       this.submitting = true;
       this.errorMessage = '';
@@ -52,6 +56,22 @@ export class ExmgForm extends LitElement {
     }
   }
 
+  public validate(): void {
+    this.ironFormElem!.validate();
+  }
+
+  public reset(): void {
+    this.ironFormElem!.reset();
+  }
+
+  public serializeForm(): {[key: string]: any} {
+    return this.ironFormElem!.serializeForm();
+  }
+
+  private onSubmitBtnClick(): void {
+    this.submit();
+  }
+
   private onCancelBtnClick(): void {
     this.submitting = false;
     this.errorMessage = '';
@@ -64,6 +84,29 @@ export class ExmgForm extends LitElement {
         }
       )
     );
+  }
+
+  private onEnterPressed(e: KeyboardEvent) {
+    switch (e.code || e.keyCode) {
+      case ENTER_KEY_CODE:
+      case 'Enter':
+      case 'NumpadEnter':
+        e.stopPropagation();
+        this.submit();
+        break;
+    }
+  }
+
+  connectedCallback(): void {
+    super.connectedCallback();
+
+    this.addEventListener('keydown', this.onEnterPressed);
+  }
+
+  disconnectedCallback(): void {
+    this.removeEventListener('keydown', this.onEnterPressed);
+
+    super.disconnectedCallback();
   }
 
   protected updated(_: PropertyValues): void {
@@ -89,8 +132,8 @@ export class ExmgForm extends LitElement {
     return html`
       <div class="error ${ !!this.errorMessage ? 'show' : '' }">
         <span class="body">
-          <span>
-            <iron-icon icon="exmg-icons:warning"></iron-icon>
+          <span class="body-content">
+            ${warningIcon}
             <span class="msg">${this.errorMessage}</span>
           </span>
         </span>
