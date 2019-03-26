@@ -1,4 +1,4 @@
-import { LitElement, html, customElement } from 'lit-element';
+import {LitElement, html, customElement} from 'lit-element';
 import '@polymer/paper-input/paper-input.js';
 import '@polymer/paper-input/paper-textarea';
 import '@polymer/paper-button/paper-button.js';
@@ -9,7 +9,7 @@ import '@exmg/exmg-markdown-editor/exmg-markdown-editor.js';
 import '@exmg/exmg-radio-group/exmg-radio-group';
 import '@exmg/exmg-radio-group/exmg-radio-group-item';
 import '../exmg-form';
-import { ExmgForm } from 'exmg-form';
+import {ExmgForm} from 'exmg-form';
 
 @customElement('form-demo')
 export class FormDemo extends LitElement {
@@ -74,14 +74,14 @@ export class FormDemo extends LitElement {
     `;
   }
 
-  onSubmit(event: CustomEvent) {
+  onSubmit(event: any) {
     console.log('submit', event);
     setTimeout(_ => {
       event.path[0].error('User does not have permission to save data');
     }, 1500);
   }
 
-  onCancel(event) {
+  onCancel(event: any) {
     console.log('cancel', event);
   }
 
