@@ -49,12 +49,12 @@ export class FormDemo extends LitElement {
         <exmg-radio-group name="license" selected="option2">
           <exmg-radio-group-item value="option1">
               <div slot="title">Option 1</div>
-              <div slot="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
+              <div slot="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
               tempor incididunt ut labore et dolore magna aliqua.</div>
           </exmg-radio-group-item>
           <exmg-radio-group-item value="option2">
               <div slot="title">Option 2</div>
-              <div slot="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
+              <div slot="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
               tempor incididunt ut labore et dolore magna aliqua.</div>
           </exmg-radio-group-item>
         </exmg-radio-group>
