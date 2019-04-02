@@ -2,6 +2,7 @@ node_modules/
 *.sublime*
 .idea
 
+*.js.map
 *.d.ts
 *.js
 !gulpfile.js
