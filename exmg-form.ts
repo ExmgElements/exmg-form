@@ -135,13 +135,13 @@ export class ExmgForm extends LitElement {
   ];
 
   private renderCancelButton() {
-    this.showCancelButton ?
+    return this.showCancelButton ?
       html`<paper-button class="cancel" @click="${this.onCancelBtnClick}">${this.cancelButtonCopy}</paper-button>` :
       '';
   }
 
   private renderSubmitButton() {
-    this.showSubmitButton ?
+    return this.showSubmitButton ?
       html`
         <paper-button
           @click="${this.onSubmitBtnClick}"
