@@ -45,7 +45,7 @@ export class ExmgForm extends LitElement {
   }
 
   public submit(): void {
-    if (this.ironFormElem!.validate()) {
+    if (this.ironFormElem && this.ironFormElem.validate()) {
       this.submitting = true;
       this.errorMessage = '';
       this.dispatchEvent(
@@ -54,7 +54,7 @@ export class ExmgForm extends LitElement {
           {
             bubbles: false,
             composed: false,
-            detail: this.ironFormElem!.serializeForm(),
+            detail: this.ironFormElem.serializeForm(),
           }
         )
       );
@@ -76,15 +76,23 @@ export class ExmgForm extends LitElement {
   }
 
   public validate(): void {
-    this.ironFormElem!.validate();
+    if (this.ironFormElem) {
+      this.ironFormElem.validate();
+    }
   }
 
   public reset(): void {
-    this.ironFormElem!.reset();
+    if (this.ironFormElem) {
+      this.ironFormElem.reset();
+    }
   }
 
-  public serializeForm(): {[key: string]: any} {
-    return this.ironFormElem!.serializeForm();
+  public serializeForm(): {[key: string]: any}|undefined {
+    if (this.ironFormElem) {
+      return this.ironFormElem.serializeForm();
+    }
+
+    return;
   }
 
   private onSubmitBtnClick(): void {
