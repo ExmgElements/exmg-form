@@ -11,11 +11,17 @@ const warningIcon = html`<svg height="24" viewBox="0 0 24 24" width="24"><path d
 
 @customElement('exmg-form')
 export class ExmgForm extends LitElement {
+  @property({type: String, attribute: 'show-submit-button'})
+  public showSubmitButton: boolean = true;
+
   @property({type: String, attribute: 'show-cancel-button'})
   public showCancelButton: boolean = true;
 
   @property({type: String, attribute: 'submit-button-copy'})
   public submitButtonCopy: string = 'Submit';
+
+  @property({type: String, attribute: 'cancel-button-copy'})
+  public cancelButtonCopy: string = 'Cancel';
 
   @property({type: Boolean})
   public inline: boolean = false;
@@ -55,6 +61,20 @@ export class ExmgForm extends LitElement {
     }
   }
 
+  public cancel(): void {
+    this.submitting = false;
+    this.errorMessage = '';
+    this.dispatchEvent(
+      new CustomEvent(
+        'cancel',
+        {
+          bubbles: false,
+          composed: true,
+        }
+      )
+    );
+  }
+
   public validate(): void {
     this.ironFormElem!.validate();
   }
@@ -72,17 +92,7 @@ export class ExmgForm extends LitElement {
   }
 
   private onCancelBtnClick(): void {
-    this.submitting = false;
-    this.errorMessage = '';
-    this.dispatchEvent(
-      new CustomEvent(
-        'cancel',
-        {
-          bubbles: false,
-          composed: true,
-        }
-      )
-    );
+    this.cancel();
   }
 
   private onEnterPressed(e: KeyboardEvent) {
@@ -124,6 +134,39 @@ export class ExmgForm extends LitElement {
     exmgFormStyles,
   ];
 
+  private renderCancelButton() {
+    this.showCancelButton ?
+      html`<paper-button class="cancel" @click="${this.onCancelBtnClick}">${this.cancelButtonCopy}</paper-button>` :
+      '';
+  }
+
+  private renderSubmitButton() {
+    this.showSubmitButton ?
+      html`
+        <paper-button
+          @click="${this.onSubmitBtnClick}"
+          ?disabled="${this.submitting}"
+          class="primary"
+        >
+            ${this.submitButtonCopy}${this.submitting ? html`<paper-spinner-lite active></paper-spinner-lite>` : ''}
+        </paper-button>
+      ` :
+      '';
+  }
+
+  private renderActions() {
+    if (!this.showSubmitButton && !this.showCancelButton) {
+      return '';
+    }
+
+    return html`
+      <div class="actions ${this.inline ? 'inline' : ''}">
+        ${this.renderCancelButton()}
+        ${this.renderSubmitButton()}
+      </div>
+    `;
+  }
+
   protected render() {
     return html`
       <div class="error ${ !!this.errorMessage ? 'show' : '' }">
@@ -137,20 +180,7 @@ export class ExmgForm extends LitElement {
       <iron-form id="ironForm">
         <form id="form">
           <slot></slot>
-          <div class="actions ${this.inline ? 'inline' : ''}">
-            ${
-              this.showCancelButton ?
-                html`<paper-button class="cancel" @click="${this.onCancelBtnClick}">Cancel</paper-button>` :
-                ''
-            }
-            <paper-button
-              @click="${this.onSubmitBtnClick}"
-              ?disabled="${this.submitting}"
-              class="primary"
-            >
-                ${this.submitButtonCopy}${this.submitting ? html`<paper-spinner-lite active></paper-spinner-lite>` : ''}
-            </paper-button>
-          </div>
+          ${this.renderActions()}
         </form>
       </iron-form>
     `;
