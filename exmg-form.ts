@@ -11,11 +11,11 @@ const warningIcon = html`<svg height="24" viewBox="0 0 24 24" width="24"><path d
 
 @customElement('exmg-form')
 export class ExmgForm extends LitElement {
-  @property({type: String, attribute: 'show-submit-button'})
-  public showSubmitButton: boolean = true;
+  @property({type: Boolean, attribute: 'hide-submit-button'})
+  public hideSubmitButton: boolean = false;
 
-  @property({type: String, attribute: 'show-cancel-button'})
-  public showCancelButton: boolean = true;
+  @property({type: Boolean, attribute: 'hide-cancel-button'})
+  public hideCancelButton: boolean = false;
 
   @property({type: String, attribute: 'submit-button-copy'})
   public submitButtonCopy: string = 'Submit';
@@ -135,13 +135,13 @@ export class ExmgForm extends LitElement {
   ];
 
   private renderCancelButton() {
-    return this.showCancelButton ?
+    return !this.hideCancelButton ?
       html`<paper-button class="cancel" @click="${this.onCancelBtnClick}">${this.cancelButtonCopy}</paper-button>` :
       '';
   }
 
   private renderSubmitButton() {
-    return this.showSubmitButton ?
+    return !this.hideSubmitButton ?
       html`
         <paper-button
           @click="${this.onSubmitBtnClick}"
@@ -155,7 +155,7 @@ export class ExmgForm extends LitElement {
   }
 
   private renderActions() {
-    if (!this.showSubmitButton && !this.showCancelButton) {
+    if (this.hideSubmitButton && this.hideCancelButton) {
       return '';
     }
 
