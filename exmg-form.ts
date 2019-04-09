@@ -53,7 +53,7 @@ export class ExmgForm extends LitElement {
           'submit',
           {
             bubbles: false,
-            composed: true,
+            composed: false,
             detail: this.ironFormElem!.serializeForm(),
           }
         )
@@ -69,7 +69,7 @@ export class ExmgForm extends LitElement {
         'cancel',
         {
           bubbles: false,
-          composed: true,
+          composed: false,
         }
       )
     );
