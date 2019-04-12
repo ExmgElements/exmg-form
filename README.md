@@ -12,15 +12,15 @@ Events:
 2. **cancel** - when cancel button pressed.
 
 Attributes:
-1. **showCancelButton**
-2. **submitButtonCopy**
+1. **hide-cancel-button**
+2. **submit-button-copy**
 3. **inline** - whether or not try to display form in single line
 
 ```
 <exmg-form
     @submit="${this.submit}"
     @cancel="${this.cancel}"
-    ?showCancelButton=${true}
+    ?hide-cancel-button=${false}
     submit-button-copy="Submit"
     ?inline=${false}
 >

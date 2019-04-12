@@ -11,11 +11,17 @@ const warningIcon = html`<svg height="24" viewBox="0 0 24 24" width="24"><path d
 
 @customElement('exmg-form')
 export class ExmgForm extends LitElement {
-  @property({type: String, attribute: 'show-cancel-button'})
-  public showCancelButton: boolean = true;
+  @property({type: Boolean, attribute: 'hide-submit-button'})
+  public hideSubmitButton: boolean = false;
+
+  @property({type: Boolean, attribute: 'hide-cancel-button'})
+  public hideCancelButton: boolean = false;
 
   @property({type: String, attribute: 'submit-button-copy'})
   public submitButtonCopy: string = 'Submit';
+
+  @property({type: String, attribute: 'cancel-button-copy'})
+  public cancelButtonCopy: string = 'Cancel';
 
   @property({type: Boolean})
   public inline: boolean = false;
@@ -39,7 +45,7 @@ export class ExmgForm extends LitElement {
   }
 
   public submit(): void {
-    if (this.ironFormElem!.validate()) {
+    if (this.ironFormElem && this.ironFormElem.validate()) {
       this.submitting = true;
       this.errorMessage = '';
       this.dispatchEvent(
@@ -47,31 +53,15 @@ export class ExmgForm extends LitElement {
           'submit',
           {
             bubbles: false,
-            composed: true,
-            detail: this.ironFormElem!.serializeForm(),
+            composed: false,
+            detail: this.ironFormElem.serializeForm(),
           }
         )
       );
     }
   }
 
-  public validate(): void {
-    this.ironFormElem!.validate();
-  }
-
-  public reset(): void {
-    this.ironFormElem!.reset();
-  }
-
-  public serializeForm(): {[key: string]: any} {
-    return this.ironFormElem!.serializeForm();
-  }
-
-  private onSubmitBtnClick(): void {
-    this.submit();
-  }
-
-  private onCancelBtnClick(): void {
+  public cancel(): void {
     this.submitting = false;
     this.errorMessage = '';
     this.dispatchEvent(
@@ -79,10 +69,38 @@ export class ExmgForm extends LitElement {
         'cancel',
         {
           bubbles: false,
-          composed: true,
+          composed: false,
         }
       )
     );
+  }
+
+  public validate(): void {
+    if (this.ironFormElem) {
+      this.ironFormElem.validate();
+    }
+  }
+
+  public reset(): void {
+    if (this.ironFormElem) {
+      this.ironFormElem.reset();
+    }
+  }
+
+  public serializeForm(): {[key: string]: any}|undefined {
+    if (this.ironFormElem) {
+      return this.ironFormElem.serializeForm();
+    }
+
+    return;
+  }
+
+  private onSubmitBtnClick(): void {
+    this.submit();
+  }
+
+  private onCancelBtnClick(): void {
+    this.cancel();
   }
 
   private onEnterPressed(e: KeyboardEvent) {
@@ -124,6 +142,39 @@ export class ExmgForm extends LitElement {
     exmgFormStyles,
   ];
 
+  private renderCancelButton() {
+    return !this.hideCancelButton ?
+      html`<paper-button class="cancel" @click="${this.onCancelBtnClick}">${this.cancelButtonCopy}</paper-button>` :
+      '';
+  }
+
+  private renderSubmitButton() {
+    return !this.hideSubmitButton ?
+      html`
+        <paper-button
+          @click="${this.onSubmitBtnClick}"
+          ?disabled="${this.submitting}"
+          class="primary"
+        >
+            ${this.submitButtonCopy}${this.submitting ? html`<paper-spinner-lite active></paper-spinner-lite>` : ''}
+        </paper-button>
+      ` :
+      '';
+  }
+
+  private renderActions() {
+    if (this.hideSubmitButton && this.hideCancelButton) {
+      return '';
+    }
+
+    return html`
+      <div class="actions ${this.inline ? 'inline' : ''}">
+        ${this.renderCancelButton()}
+        ${this.renderSubmitButton()}
+      </div>
+    `;
+  }
+
   protected render() {
     return html`
       <div class="error ${ !!this.errorMessage ? 'show' : '' }">
@@ -137,20 +188,7 @@ export class ExmgForm extends LitElement {
       <iron-form id="ironForm">
         <form id="form">
           <slot></slot>
-          <div class="actions ${this.inline ? 'inline' : ''}">
-            ${
-              this.showCancelButton ?
-                html`<paper-button class="cancel" @click="${this.onCancelBtnClick}">Cancel</paper-button>` :
-                ''
-            }
-            <paper-button
-              @click="${this.onSubmitBtnClick}"
-              ?disabled="${this.submitting}"
-              class="primary"
-            >
-                ${this.submitButtonCopy}${this.submitting ? html`<paper-spinner-lite active></paper-spinner-lite>` : ''}
-            </paper-button>
-          </div>
+          ${this.renderActions()}
         </form>
       </iron-form>
     `;
