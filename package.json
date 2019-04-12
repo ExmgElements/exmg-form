@@ -1,8 +1,8 @@
 {
   "name": "@exmg/exmg-form",
   "flat": true,
-  "version": "1.2.0",
-  "description": "Paper style token input element",
+  "version": "1.2.1",
+  "description": "Paper style form wrapper",
   "contributors": [
     "Ex Machina"
   ],
