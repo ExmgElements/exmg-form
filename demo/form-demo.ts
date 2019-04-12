@@ -68,6 +68,15 @@ export class FormDemo extends LitElement {
         </exmg-markdown-editor>
       </exmg-form>
 
+      <h1>Custom style</h1>
+      <p>Implements different style to comply with PlayTwo CMS designs.</p>
+      <ul>
+        <li>.blue</li>
+      </ul>
+      <exmg-form class="blue" @submit="${this.onSubmit}" @cancel="${this.onCancel}" >
+        <paper-input label="text input" required></paper-input>
+      </exmg-form>
+
       <h1>Inline form</h1>
       <exmg-form @submit="${this.onSubmit}" @cancel="${this.onCancel}" inline>
         <paper-input label="text input" required></paper-input>
