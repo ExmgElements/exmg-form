@@ -23,7 +23,7 @@ suite('<exmg-form>', function () {
       await flushCompleted();
 
       const field1Input = element.querySelector<HTMLInputElement>('paper-input[name=field1]')!;
-      const submitBtn = <HTMLElement>element.shadowRoot!.querySelector('paper-button.primary');
+      const submitBtn = <HTMLElement>element.shadowRoot!.querySelector('exmg-button[unelevated]');
 
       const eventPromise = onExmgFormSubmit(element, true);
 
@@ -38,7 +38,7 @@ suite('<exmg-form>', function () {
 
     test('form with missing required fields should not submit data', async () => {
       await flushCompleted();
-      const submitBtn = <HTMLElement>element.shadowRoot!.querySelector('paper-button.primary');
+      const submitBtn = <HTMLElement>element.shadowRoot!.querySelector('exmg-button[unelevated]');
 
       const eventPromise = onExmgFormSubmit(element, false);
 
@@ -59,7 +59,7 @@ suite('<exmg-form>', function () {
 
     test('form should throw cancel event', async () => {
       await flushCompleted();
-      const cancelBtn = <HTMLElement>element.shadowRoot!.querySelector('paper-button.cancel');
+      const cancelBtn = <HTMLElement>element.shadowRoot!.querySelector('exmg-button.cancel');
 
       const eventPromise = onExmgFormCancel(element, true);
 
