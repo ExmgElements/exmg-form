@@ -5,7 +5,7 @@ export const exmgFormStyles = css`
       font-family: 'Roboto', 'Noto', sans-serif;
     }
     .actions {
-      margin: 24px 0;
+      margin: 24px 0 0;
       text-align: right;
     }
     .inline {
@@ -50,7 +50,6 @@ export const exmgFormStyles = css`
     .error.show {
       display: block;
     }
-
     paper-spinner-lite {
       vertical-align: middle;
       width: 20px;
