@@ -4,22 +4,8 @@ export const exmgFormStyles = css`
     :host {
       font-family: 'Roboto', 'Noto', sans-serif;
     }
-    :host(.blue) paper-button {
-      color: white;
-      background: #0071dc;
-    }
-    :host(.blue) paper-button:hover {
-      background: #0060ca;
-    }
-    :host(.blue) paper-button[pressed] {
-      background: #0041a9;
-    }
-    :host(.blue) paper-button[disabled] {
-      opacity: 0.6;
-      background: #0071dc;
-    }
     .actions {
-      margin: 24px 0;
+      margin: 24px 0 0;
       text-align: right;
     }
     .inline {
@@ -64,7 +50,6 @@ export const exmgFormStyles = css`
     .error.show {
       display: block;
     }
-
     paper-spinner-lite {
       vertical-align: middle;
       width: 20px;

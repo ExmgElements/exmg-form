@@ -1,7 +1,6 @@
 import {customElement, html, LitElement, property, PropertyValues, query} from 'lit-element';
-import '@polymer/paper-button';
 import '@polymer/iron-form';
-import '@polymer/paper-spinner/paper-spinner-lite';
+import '@exmg/exmg-button';
 import {exmgFormStyles} from './exmg-form-styles';
 import {IronFormElement} from '@polymer/iron-form/iron-form';
 
@@ -85,6 +84,9 @@ export class ExmgForm extends LitElement {
     if (this.ironFormElem) {
       this.ironFormElem.reset();
     }
+
+    this.submitting = false;
+    this.errorMessage = '';
   }
 
   public serializeForm(): {[key: string]: any}|undefined {
@@ -144,20 +146,18 @@ export class ExmgForm extends LitElement {
 
   private renderCancelButton() {
     return !this.hideCancelButton ?
-      html`<paper-button class="cancel" @click="${this.onCancelBtnClick}">${this.cancelButtonCopy}</paper-button>` :
-      '';
+      html`<exmg-button class="cancel" @click="${this.onCancelBtnClick}">${this.cancelButtonCopy}</exmg-button>` 
+      : '';
   }
 
   private renderSubmitButton() {
     return !this.hideSubmitButton ?
       html`
-        <paper-button
+        <exmg-button
+          unelevated
           @click="${this.onSubmitBtnClick}"
           ?disabled="${this.submitting}"
-          class="primary"
-        >
-            ${this.submitButtonCopy}${this.submitting ? html`<paper-spinner-lite active></paper-spinner-lite>` : ''}
-        </paper-button>
+          ?loading=${this.submitting}>${this.submitButtonCopy}</exmg-button>
       ` :
       '';
   }
