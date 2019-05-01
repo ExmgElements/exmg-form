@@ -146,7 +146,7 @@ export class ExmgForm extends LitElement {
 
   private renderCancelButton() {
     return !this.hideCancelButton ?
-      html`<exmg-button class="cancel" @click="${this.onCancelBtnClick}">${this.cancelButtonCopy}</exmg-button>` 
+      html`<exmg-button class="cancel" @click="${this.onCancelBtnClick}">${this.cancelButtonCopy}</exmg-button>`
       : '';
   }
 
